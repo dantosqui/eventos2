@@ -5,9 +5,14 @@ import userController from "./src/controllers/user-controller.js";
 import locationController from "./src/controllers/location-controller.js";
 import categoryController from "./src/controllers/category-controller.js";
 import eventLocationController from "./src/controllers/event_location-controller.js";
+import cors from 'cors'
 
 
 const app = express(); 
+
+app.use(cors({
+  origin: 'http://localhost:3000' // Permitir solo este origen
+}));
 app.use(express.json())
 const port = 4587;
 
