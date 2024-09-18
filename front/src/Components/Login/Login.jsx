@@ -3,6 +3,8 @@ import { Link, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import urlBack from '../../config';
 import './Login.css'; // Opcional, para estilos personalizados 
+import { redirect } from "react-router-dom";
+
 
 function Login() {
   const [username, setUsername] = useState('');
