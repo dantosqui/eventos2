@@ -37,8 +37,9 @@ function Navbar() {
             <div>
               <div style={style.navbarMenuItemStyle}>
                   <img className='profile' src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS_SoCj7PRojw5z3XnJ9iJGlSaoqhZ1XmSE9g&s" alt="profile" />
+                 <div className="lavaina">
                   <span>{username}</span>
-                
+                  </div>
               </div>
               <li style={style.navbarMenuItemStyle}><button onClick={handleCerrarSesion}>Cerrar sesión</button></li>
             </div>
