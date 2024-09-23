@@ -52,7 +52,7 @@ if (loggedIn[0].user_exists != -1) {
 userController.post("/register", (req, res) => {  
   let error = false;
   let user = new User()
-
+  
   try{
     if(req.body.first_name.length<3 || req.body.first_name === undefined || req.body.last_name.length<3 || req.body.last_name === undefined){
       throw new error("Datos no validos")
@@ -68,14 +68,17 @@ userController.post("/register", (req, res) => {
       throw new error ("datos no validos")
     }
     user.password = req.body.password 
-    
+    console.log(req.body.first_name)
     userService.Register(user)
-    return res.status(201).json("Registrado correctamente")
-  }
+    return res.status(201).send(
+    {
+      success:true,
+  })
+}
   catch (e){
     return res.status (400).json("datos no validos")
   }
-
+  
   
 });
 
