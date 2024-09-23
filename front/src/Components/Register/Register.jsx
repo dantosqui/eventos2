@@ -17,10 +17,10 @@ function Register() {
     
     try {
       const response = await axios.post(`${urlBack}user/register`, {
-        firstName,
-        lastName,
-        username,
-        password
+        first_name: firstName,
+        last_name: lastName,
+        username: username,
+        password: password
       });
       console.log("res",response)
       if (response.data.success==true) {
@@ -62,7 +62,7 @@ function Register() {
         <div className="form-group">
           <label htmlFor="username">E-mail</label>
           <input
-            type="text"
+            type="email"
             id="username"
             value={username}
             onChange={(e) => setUsername(e.target.value)}
