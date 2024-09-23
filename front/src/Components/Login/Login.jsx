@@ -25,6 +25,7 @@ function Login() {
         localStorage.setItem('token', response.data.token);
         localStorage.setItem('loggedUsername',username)
         navigate('/'); // Redirige a la página principal en caso de éxito
+        window.location.reload()
       } else {
         setError('Contraseña incorrecta o usuario no encontrado'); // Mensaje de error
       }

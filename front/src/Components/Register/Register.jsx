@@ -26,6 +26,7 @@ function Register() {
       if (response.data.success==true) {
         localStorage.setItem('token', response.data.token);
         navigate('/'); // Redirige a la página principal en caso de éxito
+        window.location.reload()
       } else {
         setError('Contraseña incorrecta o usuario no encontrado'); // Mensaje de error
       }
