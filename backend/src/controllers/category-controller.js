@@ -10,7 +10,7 @@ categoryController.get("/",middleware.pagination,async (req,res) => {
     
     const pageSize = req.limit
     const page = req.offset
-    
+    console.log("A")
     let [allCategories,total] = await categoryService.getAllCategories(pageSize,page)
     
     res.locals.pagination.total=total
