@@ -35,20 +35,27 @@ export default function Formulario(){
     }, []); 
 
       const fetchEventCategories = async (page =1) => {
+        const fetchedCategories = []
         try {
-            const response = await axios.get(`${urlBack}event-category/`, {
+          const response = await axios.get(`${urlBack}event-category/`, {
+            params: {
                 page: page,
-                limit: 10 
-            });
-            console.log("res",response)
+                limit: 10
+            }
+        });
+            
             if (response.data.success==true) {
-              navigate('/'); 
-              window.location.reload()
+                
+                 for(let i = 0; i < response.data.collection.length; i++){
+                    fetchedCategories[i] = response.data.collection[i].name;
+                    console.log("res",response.data.collection)
+                 }
             } 
           } catch (err) {
             console.error('Error al hacer la solicitud:', err);
           }
-        const fetchedCategories = ["Categoría 1", "Categoría 2", "Categoría 3"];
+          
+        
         setCategories(fetchedCategories);
       };
 
