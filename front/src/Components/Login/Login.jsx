@@ -1,38 +1,21 @@
 import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import axios from 'axios';
-import urlBack from '../../config';
 import './Login.css'; // Opcional, para estilos personalizados 
-import { redirect } from "react-router-dom";
-
+import { useContext } from 'react';
+import { AuthContext } from '../../authcontext';
 
 function Login() {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState(''); // Estado para manejar errores
   const navigate = useNavigate(); // Hook para redirección
+  const {loggedIn,logIn} = useContext(AuthContext)
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    logIn(username,password,navigate)
     
-    try {
-      const response = await axios.post(`${urlBack}user/login`, {
-        username,
-        password
-      });
-      console.log("res",response)
-      if (response.data.success==true) {
-        localStorage.setItem('token', response.data.token);
-        localStorage.setItem('loggedUsername',username)
-        navigate('/'); // Redirige a la página principal en caso de éxito
-        window.location.reload()
-      } else {
-        setError('Contraseña incorrecta o usuario no encontrado'); // Mensaje de error
-      }
-    } catch (err) {
-      setError('Hubo un problema al iniciar sesión'); // Manejo de errores en la solicitud
-      console.error('Error al hacer la solicitud:', err);
-    }
+    
   };
 
   return (

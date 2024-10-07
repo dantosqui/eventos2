@@ -1,0 +1,72 @@
+form {
+    width: 100%;
+    max-width: 600px;
+    margin: 40px auto;
+    padding: 20px;
+    background-color: #f4f4f4;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    font-family: 'Arial', sans-serif;
+  }
+  
+  form div {
+    margin-bottom: 15px;
+  }
+  
+  label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: bold;
+    color: #333;
+  }
+  
+  input[type="text"],
+  input[type="number"],
+  input[type="datetime-local"],
+  textarea,
+  select {
+    width: calc(100% - 20px);  /* Ajuste para hacer todos los inputs iguales */
+    padding: 10px;
+    margin: 0;  /* Elimina márgenes internos */
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 16px;
+    box-sizing: border-box;  /* Asegura que padding no agrande los elementos */
+  }
+  
+  textarea {
+    height: 100px;
+  }
+  
+  input[type="checkbox"] {
+    margin-right: 8px;
+  }
+  
+  button {
+    background-color: #5b9bd5;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+    cursor: pointer;
+  }
+  
+  button:hover {
+    background-color: #4a8acb;
+  }
+  
+  input:focus,
+  textarea:focus,
+  select:focus {
+    border-color: #5b9bd5;
+    outline: none;
+    box-shadow: 0 0 5px rgba(91, 155, 213, 0.5);
+  }
+  
+  @media (max-width: 768px) {
+    form {
+      padding: 15px;
+    }
+  }
+  
