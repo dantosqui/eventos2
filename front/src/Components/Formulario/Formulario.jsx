@@ -25,7 +25,7 @@ export default function Formulario(){
       const [locations, setLocations] = useState([]);
       const [users, setUsers] = useState([]);
 
-      const {checkAuth,isLoggedIn} = useContext(AuthContext)
+      const {checkAuth,isLoggedIn,token} = useContext(AuthContext)
       const navigate=useNavigate();
 
       useEffect(() => {
@@ -34,35 +34,51 @@ export default function Formulario(){
         
     }, []); 
 
-      const fetchEventCategories = async (page =1) => {
-        const fetchedCategories = []
-        try {
+    const fetchEventCategories = async (page = 1) => {
+      const fetchedCategories = [];
+      try {
           const response = await axios.get(`${urlBack}event-category/`, {
-            params: {
-                page: page,
-                limit: 10
-            }
-        });
-            
-            if (response.data.success==true) {
-                
-                 for(let i = 0; i < response.data.collection.length; i++){
-                    fetchedCategories[i] = response.data.collection[i].name;
-                    console.log("res",response.data.collection)
-                 }
-            } 
-          } catch (err) {
-            console.error('Error al hacer la solicitud:', err);
+              params: {
+                  page: page,
+                  limit: 10
+              }
+          });
+  
+          for (let i = 0; i < response.data.collection.length; i++) {
+              fetchedCategories.push({
+                  id: response.data.collection[i].id, // assuming id is the identifier
+                  name: response.data.collection[i].name
+              });
           }
-          
-        
-        setCategories(fetchedCategories);
-      };
-
-      const fetchEventLocations = async () => {
-        const fetchedLocations = ["Ubicación 1", "Ubicación 2", "Ubicación 3"];
-        setLocations(fetchedLocations);
-      };
+      } catch (err) {
+          console.error('Error al hacer la solicitud:', err);
+      }
+      
+      setCategories(fetchedCategories);
+  };
+  
+  const fetchEventLocations = async (page = 1) => {
+      const fetchedLocations = [];
+      try {
+          const response = await axios.get(`${urlBack}location/`, {
+              params: {
+                  page: page,
+                  limit: 10
+              }
+          });
+  
+          for (let i = 0; i < response.data.collection.length; i++) {
+              fetchedLocations.push({
+                  id: response.data.collection[i].id, // assuming id is the identifier
+                  name: response.data.collection[i].name
+              });
+          }
+      } catch (err) {
+          console.error('Error al hacer la solicitud:', err);
+      }
+  
+      setLocations(fetchedLocations);
+  };
     
       useEffect(() => {
         fetchEventCategories();
@@ -81,7 +97,29 @@ export default function Formulario(){
         e.preventDefault();
         console.log(formData);
       };
-    
+    const  crearEvento = async () =>{
+
+      const startDate = new Date(formData.startDate);
+      const formattedStartDate = `${startDate.getFullYear()}-${String(startDate.getMonth() + 1).padStart(2, '0')}-${String(startDate.getDate()).padStart(2, '0')} ${String(startDate.getHours()).padStart(2, '0')}:${String(startDate.getMinutes()).padStart(2, '0')}:${String(startDate.getSeconds()).padStart(2, '0')}`;
+      try {
+        const response = await axios.post(`${urlBack}event/`, {
+         name: formData.name,
+         description: formData.description,
+         max_assistance: formData.maxAssistance,
+         id_event_location: formData.eventLocation,
+         id_event_category: formData.eventCategory,
+         enabled_for_enrollment: formData.enabledForEnrollment,
+         startDate: formattedStartDate,
+        duration_in_minutes: formData.duration,
+        price: formData.price
+      },{headers:{Authorization:`Bearer ${token}`}});
+         
+        } catch (err) {
+          console.error('Error al hacer la solicitud:', err);
+        }
+        
+
+    }
       return (
         <form onSubmit={handleSubmit}>
           <div>
@@ -108,35 +146,35 @@ export default function Formulario(){
           <div>
             <label>Categoría del evento:</label>
             <select
-              name="eventCategory"
-              value={formData.eventCategory}
-              onChange={handleInputChange}
-              required
-            >
-              <option value="">Selecciona una categoría</option>
-              {categories.map((category, index) => (
-                <option key={index} value={category}>
-                  {category}
-                </option>
-              ))}
-            </select>
+    name="eventCategory"
+    value={formData.eventCategory}
+    onChange={handleInputChange}
+    required
+>
+    <option value="">Selecciona una categoría</option>
+    {categories.map((category) => (
+        <option key={category.id} value={category.id-1}>
+            {category.name}
+        </option>
+    ))}
+</select>
           </div>
     
           <div>
             <label>Ubicación del evento:</label>
             <select
-              name="eventLocation"
-              value={formData.eventLocation}
-              onChange={handleInputChange}
-              required
-            >
-              <option value="">Selecciona una ubicación</option>
-              {locations.map((location, index) => (
-                <option key={index} value={location}>
-                  {location}
-                </option>
-              ))}
-            </select>
+    name="eventLocation"
+    value={formData.eventLocation}
+    onChange={handleInputChange}
+    required
+>
+    <option value="">Selecciona una ubicación</option>
+    {locations.map((location) => (
+        <option key={location.id} value={location.id-1}>
+            {location.name}
+        </option>
+    ))}
+</select>
           </div>
     
           <div>
@@ -195,8 +233,9 @@ export default function Formulario(){
     
          
     
-          <button type="submit">Crear evento</button>
+          <button onClick={() => crearEvento()} type="submit">Crear evento</button>
         </form>
       );
+
 
 }

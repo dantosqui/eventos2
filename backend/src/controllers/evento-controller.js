@@ -88,12 +88,12 @@ eventoController.post("/", middleware.userMiddleware, async (req, res) => {
 
     evento.max_assistance = req.body.max_assistance;
     evento.id_event_location = req.body.id_event_location;
-
+/*
     if (
       eventoService.getMaxCapacity(evento.id_event_location) <
       evento.max_assistance
     )
-      throw new Error("Capacidad maxima de personas exedida");
+      throw new Error("Capacidad maxima de personas exedida");*/
 
       evento.price = req.body.price;
       evento.duration_in_minutes = req.body.duration_in_minutes;
