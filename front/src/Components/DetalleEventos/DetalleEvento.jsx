@@ -74,12 +74,8 @@ const DetalleEventos = () => {
                     <p><strong>Lugar:</strong> {event.event_location.name}</p>
                     <h3>Creador:</h3>
                     <p>{event.creator_user.first_name} {event.creator_user.last_name}</p>
-                    <h3>Tags:</h3>
-                    <ul>
-                        {event.tags.map(tag => (
-                            <li key={tag.id}>{tag.name}</li>
-                        ))}
-                    </ul>
+                 
+                    
                     <h3>Categoria:</h3>
                     <p>{event.event_category.name}</p>
                     <button onClick={handleSubscribe}>suscribirse</button>

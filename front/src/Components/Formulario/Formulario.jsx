@@ -60,10 +60,13 @@ export default function Formulario(){
   const fetchEventLocations = async (page = 1) => {
       const fetchedLocations = [];
       try {
-          const response = await axios.get(`${urlBack}location/`, {
+          const response = await axios.get(`${urlBack}event-location/`, {
               params: {
                   page: page,
                   limit: 10
+              },
+              headers:{
+                Authorization:`Bearer ${token}`
               }
           });
   
@@ -96,11 +99,12 @@ export default function Formulario(){
       const handleSubmit = (e) => {
         e.preventDefault();
         console.log(formData);
+        crearEvento();
       };
     const  crearEvento = async () =>{
 
-      const startDate = new Date(formData.startDate);
-      const formattedStartDate = `${startDate.getFullYear()}-${String(startDate.getMonth() + 1).padStart(2, '0')}-${String(startDate.getDate()).padStart(2, '0')} ${String(startDate.getHours()).padStart(2, '0')}:${String(startDate.getMinutes()).padStart(2, '0')}:${String(startDate.getSeconds()).padStart(2, '0')}`;
+      
+      
       try {
         const response = await axios.post(`${urlBack}event/`, {
          name: formData.name,
@@ -109,7 +113,7 @@ export default function Formulario(){
          id_event_location: formData.eventLocation,
          id_event_category: formData.eventCategory,
          enabled_for_enrollment: formData.enabledForEnrollment,
-         startDate: formattedStartDate,
+         start_date: formData.startDate,
         duration_in_minutes: formData.duration,
         price: formData.price
       },{headers:{Authorization:`Bearer ${token}`}});
@@ -170,7 +174,7 @@ export default function Formulario(){
 >
     <option value="">Selecciona una ubicación</option>
     {locations.map((location) => (
-        <option key={location.id} value={location.id-1}>
+        <option key={location.id} value={location.id}>
             {location.name}
         </option>
     ))}
@@ -233,7 +237,7 @@ export default function Formulario(){
     
          
     
-          <button onClick={() => crearEvento()} type="submit">Crear evento</button>
+          <button type="submit">Crear evento</button>
         </form>
       );
 

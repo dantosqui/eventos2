@@ -79,7 +79,7 @@ eventoController.get("/:id", async (req, res) => {
 eventoController.post("/", middleware.userMiddleware, async (req, res) => {
   try {
     let evento = new Events();
-
+    
     evento.name = req.body.name;
     evento.description = req.body.description;
 
@@ -104,11 +104,10 @@ eventoController.post("/", middleware.userMiddleware, async (req, res) => {
     evento.enabled_for_enrollment = req.body.enabled_for_enrollment;
     evento.id_creator_user = req.id;
     evento.id_event_category = req.body.id_event_category;
-    evento.start_date = req.body.start_date
-      ? new Date(req.body.start_date)
-      : undefined;
+    evento.start_date = new Date(req.body.start_date);
     await eventoService.PostEvent(evento);
 
+    console.log(req.body.start_date,evento.start_date)
     return res.status(201).json("Evento creado");
   } catch (error) {
     console.error(error)
