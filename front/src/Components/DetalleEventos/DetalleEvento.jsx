@@ -35,8 +35,8 @@ const DetalleEventos = () => {
 
         try {
             const response = await axios.post(`${urlBack}event/${id}/enrollment`,{
-                // You can include additional data if needed
-                description: "Interested in this event" // Example description
+                
+                description: "Interested in this event" 
             },
             {
                 headers: {

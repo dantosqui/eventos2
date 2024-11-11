@@ -23,7 +23,7 @@ export default class  Users {
     }
     async Register(user){
         const userRepo = new UsersRepository()
-        userRepo.register(user)
+        return userRepo.register(user)
     }
 
 

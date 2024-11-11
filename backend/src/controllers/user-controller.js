@@ -49,7 +49,7 @@ if (loggedIn[0].user_exists != -1) {
   }
 });
 
-userController.post("/register", (req, res) => {  
+userController.post("/register", async (req, res) => {  
   let error = false;
   let user = new User()
   
@@ -69,14 +69,16 @@ userController.post("/register", (req, res) => {
     }
     user.password = req.body.password 
     console.log(req.body.first_name)
-    userService.Register(user)
+    const e = await userService.Register(user)
+    if (e) {throw new error("error")}
+    console.log("e",e)
     return res.status(201).send(
     {
       success:true,
-  })
-}
-  catch (e){
-    return res.status (400).json("datos no validos")
+    })
+  }
+  catch (er){
+    return res.status(400).json({success:false})
   }
   
   

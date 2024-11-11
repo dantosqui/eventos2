@@ -15,7 +15,6 @@ function Login() {
     e.preventDefault();
     logIn(username,password,navigate)
     
-    
   };
 
   return (

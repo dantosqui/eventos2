@@ -28,10 +28,10 @@ function Register() {
         navigate('/'); // Redirige a la página principal en caso de éxito
         window.location.reload()
       } else {
-        setError('Contraseña incorrecta o usuario no encontrado'); // Mensaje de error
+        setError('HUbo un problema intenta de nuevo :('); // Mensaje de error
       }
     } catch (err) {
-      setError('Hubo un problema al registrarse'); // Manejo de errores en la solicitud
+      setError('Hubo un problema al registrarse, verifica tu contraseña e intenta de nuevo'); // Manejo de errores en la solicitud
       console.error('Error al hacer la solicitud:', err);
     }
   };

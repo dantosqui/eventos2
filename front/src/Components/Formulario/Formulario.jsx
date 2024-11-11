@@ -100,6 +100,7 @@ export default function Formulario(){
         e.preventDefault();
         console.log(formData);
         crearEvento();
+        navigate("/")
       };
     const  crearEvento = async () =>{
 
@@ -157,7 +158,7 @@ export default function Formulario(){
 >
     <option value="">Selecciona una categoría</option>
     {categories.map((category) => (
-        <option key={category.id} value={category.id-1}>
+        <option key={category.id} value={category.id}>
             {category.name}
         </option>
     ))}
