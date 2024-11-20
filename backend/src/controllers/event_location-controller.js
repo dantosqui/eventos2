@@ -12,7 +12,7 @@ eventLocationController.get("/",middleware.pagination,middleware.userMiddleware,
     const pageSize = req.limit
     const page = req.offset
 
-    let [allEvLocations,total] = await eventLocationService.getAllEventLocations(pageSize,page,req.id)
+    let [allEvLocations,total] = await eventLocationService.getAllEventLocations(pageSize,page)
 
     res.locals.pagination.total=total
 

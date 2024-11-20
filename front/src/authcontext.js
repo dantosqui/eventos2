@@ -37,8 +37,8 @@ export const AuthProvider = ({ children }) => {
               return 'Contraseña incorrecta o usuario no encontrado'
             }
           } catch (err) {
-            return'Hubo un problema al iniciar sesión'
             console.error('Error al hacer la solicitud:', err);
+            return'Revise la contraseña e intente de nuevo.'
         }
     };
 

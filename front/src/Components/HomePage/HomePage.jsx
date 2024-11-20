@@ -5,6 +5,7 @@ import urlBack from '../../config'; // Asegúrate de que apunta correctamente a 
 import './HomePage.css'; // Para estilos personalizados
 import { AuthContext } from '../../authcontext';
 import { useContext } from 'react';
+import EventCard from '../EventCard/EventCard.jsx';
 
 function HomePage() {
   const [events, setEvents] = useState([]);
@@ -80,13 +81,16 @@ function HomePage() {
       <h1>Lista de Eventos</h1>
       <ul>
         {events.map((event) => (
-          <Link to={`/DetalleEventos/${event.id}`}>
-          <li key={event.id}>
-            <h2>{event.name}</h2>
-            <p>{event.description}</p>
-            {/* Muestra otros detalles del evento si es necesario */}
-          </li>
-          </Link>
+          
+          <li className='carta'>
+            <EventCard 
+              redirectTo={`/DetalleEventos/${event.id}`} 
+              title={event.name} 
+              subtitle={event.description} 
+              subsubtitle={event.start_date}
+            />
+            </li>
+          
         ))}
       </ul>
       {pagination.nextPage && (

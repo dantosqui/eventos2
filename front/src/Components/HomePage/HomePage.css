@@ -15,7 +15,13 @@
   .lavaina{
     color:white;
   }
-  
+  .divDeRegisterLogin{
+    display: flex;
+    flex-direction: row;
+  }
+  .eventosImagen{
+    left: 0;
+  }
   li {
     border: 1px solid #ccc;
     padding: 10px;
@@ -65,3 +71,8 @@
     background-color: #4a8acb;
   }
   
+  .carta{
+    display: flex;
+    align-items: center;
+    width: 30%;
+  }

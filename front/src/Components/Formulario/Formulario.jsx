@@ -46,7 +46,7 @@ export default function Formulario(){
   
           for (let i = 0; i < response.data.collection.length; i++) {
               fetchedCategories.push({
-                  id: response.data.collection[i].id, // assuming id is the identifier
+                  id: response.data.collection[i].id, 
                   name: response.data.collection[i].name
               });
           }

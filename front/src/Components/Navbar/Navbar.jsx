@@ -16,8 +16,9 @@ function Navbar() {
   return (
     <nav style={style.navbarStyle}>
       <div style={style.navbarContainerStyle}>
-        <img src={logo} width="100px" height="auto" alt="Logo" />
-        <a href="/" style={style.navbarLogoStyle}>MyApp</a>
+        <div className='evntosImagen'><img src={logo} width="80px" height="auto" alt="Logo" />
+        <a href="/" style={style.navbarLogoStyle}>Eventos</a></div>
+        
         <ul style={style.navbarMenuStyle}>
           <div style={style.centradorStyle}>
             <li style={style.navbarMenuItemStyle}><Link to="/" style={style.navbarLinkStyle}>Home</Link></li>
@@ -29,12 +30,16 @@ function Navbar() {
             <li style={style.navbarMenuItemStyle}><a href="#services" style={style.navbarLinkStyle}>Services</a></li>
           </div>
           {!isLoggedIn ? (
-            <div>
+            <>
+             <div style={style.centradorStyle}>
               <li style={style.navbarMenuItemStyle}><Link to="/login" style={style.navbarLinkStyle}>Login</Link></li>
+              </div>
+              <div style={style.centradorStyle}>
               <li style={style.navbarMenuItemStyle}><Link to="/register" style={style.navbarLinkStyle}>Register</Link></li>
-            </div>
+              </div>
+         </>
           ) : (
-            <div>
+            <div className='divDeRegisterLogin'>
               <div style={style.navbarMenuItemStyle}>
                   <img className='profile' src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS_SoCj7PRojw5z3XnJ9iJGlSaoqhZ1XmSE9g&s" alt="profile" />
                  <div className="lavaina">

@@ -10,10 +10,10 @@ export default class EventLocationRepository {
 
 
 
-  async getAllEventLocations(limit,offset,creatorId) {
+  async getAllEventLocations(limit,offset) {
     try{
-        const sql = 'SELECT * FROM event_locations WHERE id_creator_user=$3 offset $2 limit $1'
-        const evloc = await this.DBClient.query(sql,[limit, offset,creatorId])
+        const sql = 'SELECT * FROM event_locations offset $2 limit $1'
+        const evloc = await this.DBClient.query(sql,[limit, offset])
 
         const sql2 = 'SELECT * FROM event_locations'
         const evloctotal = (await this.DBClient.query(sql2)).rowCount
