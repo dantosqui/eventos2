@@ -79,27 +79,29 @@ function HomePage() {
   return (
     <div className="home-page">
       <h1>Lista de Eventos</h1>
-      <ul>
+        
+        <div className='events-contain'>
         {events.map((event) => (
           
-          <li className='carta'>
+          
             <EventCard 
               redirectTo={`/DetalleEventos/${event.id}`} 
               title={event.name} 
-              subtitle={event.description} 
-              subsubtitle={event.start_date}
+              subtitle={event.event_category.name} 
+              subsubtitle={event.price}
             />
-            </li>
+            
           
         ))}
-      </ul>
+      
       {pagination.nextPage && (
         <button onClick={handleLoadMore}>Cargar más</button>
-      )}
-      <div className="link-button">
-        <Link to="/Formulario" >
-          <button>+ AÑADIR EVENTO</button>
+        )}
+      
+        <Link className='boton' to="/Formulario" >
+          + AÑADIR EVENTO
         </Link>
+        
       </div>
     </div>
   );

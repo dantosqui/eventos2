@@ -45,9 +45,9 @@ function Login() {
             required
           />
         </div>
-        <button type="submit">Login</button>
+        <button className='buttonLogin' type="submit">Login</button>
         
-        {error && <div className="error-message">{"Hubo un error. Compruebe la contraseña e intente de nuevo."}</div>} {/* Mostrar el mensaje de error */}
+        {error && <div className="error-message">{"Correo o contraseña equivocados"}</div>} {/* Mostrar el mensaje de error */}
         <Link to="/register">No tienes una cuenta? Regístrate</Link>
       </form>
     </div>

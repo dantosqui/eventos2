@@ -1,3 +1,59 @@
-.card{
-    width: 20%;
+.card-contain{
+    
+    width: 300px;
+
 }
+/* Contenedor de la tarjeta */
+.card {
+    width: 100%; /* El ancho ocupará el 100% del contenedor padre */
+    max-width: 300px; /* Limitar el ancho máximo */
+    background-color: #fff; /* Color de fondo blanco */
+    padding: 20px; /* Espaciado interno */
+    margin: 10px; /* Margen entre tarjetas */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Sombra sutil */
+    border-radius: 8px; /* Bordes redondeados */
+    text-align: center; /* Centrar el texto */
+    transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out; /* Transición suave */
+    flex-shrink:  1;
+}
+  
+  /* Efecto hover - aumentar sombra y escala */
+  .card:hover {
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+    transform: scale(1.05); /* Aumentar ligeramente el tamaño */
+  }
+  
+  /* Estilos para el título */
+  .card-title {
+    font-size: 1.5rem; /* Tamaño grande */
+    font-weight: bold;
+    margin-bottom: 10px; /* Espacio debajo del título */
+    color: #333; /* Color de texto oscuro */
+  }
+  
+  /* Estilos para el subtítulo */
+  .card-subtitle {
+    font-size: 1.2rem; /* Tamaño medio */
+    color: #666; /* Color de texto gris */
+    margin-bottom: 8px; /* Espacio debajo del subtítulo */
+  }
+  
+  /* Estilos para el sub-subtítulo */
+  .card-subsubtitle {
+    font-size: 1rem; /* Tamaño más pequeño */
+    color: #888; /* Color de texto gris más claro */
+    margin-bottom: 12px; /* Espacio debajo del sub-subtítulo */
+  }
+  
+  /* Estilo para los enlaces - eliminar el subrayado */
+  a{
+    text-decoration: none; /* Quitar subrayado */
+  }
+  
+  /* Asegurarse que el texto no se desborde */
+  .card p {
+    overflow: hidden;
+    text-overflow: ellipsis; /* Añadir puntos suspensivos si el texto es demasiado largo */
+    white-space: nowrap; /* Evitar que el texto se envuelva en varias líneas */
+  }
+  

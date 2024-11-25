@@ -34,45 +34,35 @@
     padding: 10px 20px;
     font-size: 16px;
   }
-  .link-button {
-    text-decoration: none;
-    display: inline-block;
-    margin: 20px auto;
-  }
+
   
-  .link-button button {
-    background-color: #5b9bd5; /* Color del botón */
-    color: white;
-    border: none;
-    border-radius: 5px;
-    padding: 10px 20px;
-    font-size: 16px;
-    cursor: pointer;
-    text-align: center;
-  }
   
-  .link-button button:hover {
-    background-color: #4a8acb; /* Cambia el color al pasar el mouse */
-  }
-  
-  button {
+  .boton {
     display: block;
     margin: 20px auto;
     padding: 10px 20px;
     font-size: 16px;
-    background-color: #5b9bd5;
+    background-color: #F3C623;
     color: white;
     border: none;
     border-radius: 5px;
     cursor: pointer;
   }
   
-  button:hover {
-    background-color: #4a8acb;
+  .boton:hover {
+    transition: all 150ms ease-in-out;
+    background-color: #b39118;
   }
   
   .carta{
     display: flex;
-    align-items: center;
+    justify-content: center;
     width: 30%;
+  }
+
+  .events-contain{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
   }

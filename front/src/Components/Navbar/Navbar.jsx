@@ -1,8 +1,7 @@
-// Navbar.js
 import React from 'react';
 import { Link } from 'react-router-dom';
 import logo from '../../logo.jpg';
-import {style} from './style.jsx'; // Asegúrate de que la ruta sea correcta
+import './Navbar.css';
 
 function Navbar() {
   const username = localStorage.getItem("loggedUsername");
@@ -14,42 +13,30 @@ function Navbar() {
   };
 
   return (
-    <nav style={style.navbarStyle}>
-      <div style={style.navbarContainerStyle}>
-        <div className='evntosImagen'><img src={logo} width="80px" height="auto" alt="Logo" />
-        <a href="/" style={style.navbarLogoStyle}>Eventos</a></div>
-        
-        <ul style={style.navbarMenuStyle}>
-          <div style={style.centradorStyle}>
-            <li style={style.navbarMenuItemStyle}><Link to="/" style={style.navbarLinkStyle}>Home</Link></li>
-          </div>
-          <div style={style.centradorStyle}>
-            <li style={style.navbarMenuItemStyle}><a href="#about" style={style.navbarLinkStyle}>About</a></li>
-          </div>
-          <div style={style.centradorStyle}>
-            <li style={style.navbarMenuItemStyle}><a href="#services" style={style.navbarLinkStyle}>Services</a></li>
-          </div>
+    <nav className="navbar">
+      <div className="navbar-container">
+        <div className='site-title'>
+          <a href="/" className="navbar-title">Eventos</a>
+        </div>
+
+        <div className='links'>
           {!isLoggedIn ? (
             <>
-             <div style={style.centradorStyle}>
-              <li style={style.navbarMenuItemStyle}><Link to="/login" style={style.navbarLinkStyle}>Login</Link></li>
-              </div>
-              <div style={style.centradorStyle}>
-              <li style={style.navbarMenuItemStyle}><Link to="/register" style={style.navbarLinkStyle}>Register</Link></li>
-              </div>
-         </>
+              <Link className='navbar-menu-item' to="/login">Login</Link>
+              <Link className='navbar-menu-item' to="/register">Register</Link>
+            </>
           ) : (
-            <div className='divDeRegisterLogin'>
-              <div style={style.navbarMenuItemStyle}>
-                  <img className='profile' src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS_SoCj7PRojw5z3XnJ9iJGlSaoqhZ1XmSE9g&s" alt="profile" />
-                 <div className="lavaina">
-                  <span>{username}</span>
-                  </div>
+            <div className="navbar-logged-in">
+              <div className="navbar-profile">
+                <span>{username}</span>
               </div>
-              <li style={style.navbarMenuItemStyle}><button onClick={handleCerrarSesion}>Cerrar sesión</button></li>
+              
+              <button onClick={handleCerrarSesion} className="logout-button">
+                Cerrar sesión
+              </button>
             </div>
           )}
-        </ul>
+        </div>
       </div>
     </nav>
   );

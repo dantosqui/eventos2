@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import urlBack from '../../config';
-import './Register.css'; // Opcional, para estilos personalizados
+import './Register.css';
 
 function Register() {
   const [username, setUsername] = useState('');
@@ -14,24 +14,24 @@ function Register() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    
+
     try {
       const response = await axios.post(`${urlBack}user/register`, {
         first_name: firstName,
         last_name: lastName,
-        username: username,
-        password: password
+        username,
+        password,
       });
-      console.log("res",response)
-      if (response.data.success==true) {
+
+      if (response.data.success) {
         localStorage.setItem('token', response.data.token);
-        navigate('/'); // Redirige a la página principal en caso de éxito
-        window.location.reload()
+        navigate('/');
+        window.location.reload();
       } else {
-        setError('HUbo un problema intenta de nuevo :('); // Mensaje de error
+        setError('Hubo un problema, intenta de nuevo :(');
       }
     } catch (err) {
-      setError('Hubo un problema al registrarse, verifica tu contraseña e intenta de nuevo'); // Manejo de errores en la solicitud
+      setError('Error al registrarse, verifica tus datos e intenta nuevamente');
       console.error('Error al hacer la solicitud:', err);
     }
   };
@@ -40,8 +40,8 @@ function Register() {
     <div className="login-container">
       <h2>Register</h2>
       <form onSubmit={handleSubmit} className="login-form">
-      <div className="form-group">
-          <label htmlFor="username">First name</label>
+        <div className="form-group">
+          <label htmlFor="first_name">First Name</label>
           <input
             type="text"
             id="first_name"
@@ -51,7 +51,7 @@ function Register() {
           />
         </div>
         <div className="form-group">
-          <label htmlFor="username">Last name</label>
+          <label htmlFor="last_name">Last Name</label>
           <input
             type="text"
             id="last_name"
@@ -80,9 +80,9 @@ function Register() {
             required
           />
         </div>
-        <button type="submit">Register</button>
-        {error && <div className="error-message">{error}</div>} {/* Mostrar el mensaje de error */}
-        <Link to="/login">Ya tienes una cuenta? Inicia sesion</Link>
+        <button type="submit" className="buttonLogin">Register</button>
+        {error && <div className="error-message">{error}</div>}
+        <Link to="/login">¿Ya tienes una cuenta? Inicia sesión</Link>
       </form>
     </div>
   );

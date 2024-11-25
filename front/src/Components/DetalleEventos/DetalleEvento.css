@@ -1,0 +1,113 @@
+/* Contenedor principal */
+.detalle-eventos-container {
+    max-width: 800px;
+    margin: 2rem auto;
+    padding: 2rem;
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    font-family: Arial, sans-serif;
+    box-sizing: border-box;
+  }
+  
+  /* Título del evento */
+  .detalle-eventos-container h1 {
+    font-size: 2rem;
+    color: #333;
+    margin-bottom: 1rem;
+    text-align: center;
+  }
+  
+  /* Descripción del evento */
+  .detalle-eventos-container p {
+    font-size: 1rem;
+    line-height: 1.6;
+    color: #555;
+    margin-bottom: 1rem;
+  }
+  
+  /* Subtítulos */
+  .detalle-eventos-container h2,
+  .detalle-eventos-container h3 {
+    font-size: 1.5rem;
+    color: #222;
+    margin-bottom: 0.5rem;
+  }
+  
+  /* Detalles destacados */
+  .detalle-eventos-container p strong {
+    color: #000;
+  }
+  
+  /* Botón de suscripción */
+  .detalle-eventos-container button {
+    display: block;
+    width: 100%;
+    padding: 0.75rem;
+    background-color: #F3C623;
+    color: #fff;
+    font-size: 1rem;
+    font-weight: bold;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: background-color 0.3s, transform 0.2s;
+  }
+  
+  .detalle-eventos-container button:hover {
+    background-color: #dab11e;
+  }
+  
+  .detalle-eventos-container button:active {
+    transform: scale(0.98);
+  }
+  
+  /* Mensajes de éxito */
+  .detalle-eventos-container .success-message {
+    color: #28a745;
+    font-size: 1rem;
+    margin-top: 1rem;
+    text-align: center;
+  }
+  
+  /* Mensajes de error */
+  .detalle-eventos-container .error-message {
+    color: #dc3545;
+    font-size: 1rem;
+    margin-top: 1rem;
+    text-align: center;
+  }
+  
+  /* Estilo de "No event found" */
+  .detalle-eventos-container .no-event {
+    font-size: 1.2rem;
+    color: #999;
+    text-align: center;
+    margin-top: 2rem;
+  }
+  
+  /* Media query para pantallas pequeñas */
+  @media (max-width: 480px) {
+    .detalle-eventos-container {
+      padding: 1rem;
+    }
+  
+    .detalle-eventos-container h1 {
+      font-size: 1.5rem;
+    }
+  
+    .detalle-eventos-container h2,
+    .detalle-eventos-container h3 {
+      font-size: 1.2rem;
+    }
+  
+    .detalle-eventos-container p {
+      font-size: 0.9rem;
+    }
+  
+    .detalle-eventos-container button {
+      font-size: 0.9rem;
+      padding: 0.6rem;
+    }
+  }
+  
