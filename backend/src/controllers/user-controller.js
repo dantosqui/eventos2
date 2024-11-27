@@ -69,15 +69,17 @@ userController.post("/register", async (req, res) => {
     }
     user.password = req.body.password 
     console.log(req.body.first_name)
-    const e = await userService.Register(user)
-    if (e) {throw new error("error")}
-    console.log("e",e)
+    const registrado = await userService.Register(user)
+    if (!registrado) {return res.status(400).json({success:false})}
+    console.log("e",registrado)
+    
     return res.status(201).send(
     {
-      success:true,
+      success:true, 
     })
   }
   catch (er){
+    console.log("error registrando usuario: ",er)
     return res.status(400).json({success:false})
   }
   

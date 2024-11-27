@@ -19,6 +19,7 @@ function Navbar() {
           <a href="/" className="navbar-title">Eventos</a>
         </div>
 
+
         <div className='links'>
           {!isLoggedIn ? (
             <>
@@ -27,6 +28,7 @@ function Navbar() {
             </>
           ) : (
             <div className="navbar-logged-in">
+              <Link className='navbar-menu-item' to="/edit">Editar</Link>
               <div className="navbar-profile">
                 <span>{username}</span>
               </div>

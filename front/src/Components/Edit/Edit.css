@@ -1,0 +1,19 @@
+.wrapper-dos-forms {
+    display: flex;
+    justify-content: space-evenly;
+}
+
+.form-wrapper{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+.boton-submit{
+    background-color: #F3C623;
+}
+
+.boton-submit:hover{
+    transition: all 50ms ease-in-out;
+    background-color: #dab11e;
+}

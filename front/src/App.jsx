@@ -9,6 +9,7 @@ import Register from './Components/Register/Register';
 import Formulario from './Components/Formulario/Formulario';
 import { AuthProvider } from './authcontext';
 import DetalleEventos from './Components/DetalleEventos/DetalleEvento';
+import Edit from './Components/Edit/Edit';
 
 function App() {
   return (
@@ -21,6 +22,7 @@ function App() {
                 <Route exact path ="/login" element={<Login/>}/>
                 <Route exact path ="/formulario" element={<Formulario/>}/>
                 <Route exact path="/DetalleEventos/:id" element={<DetalleEventos/>}></Route>
+                <Route exact path="/Edit/" element={<Edit/>}></Route>
             </Routes>   
         </Router>
 </AuthProvider>
