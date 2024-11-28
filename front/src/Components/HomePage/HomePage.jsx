@@ -101,7 +101,6 @@ function HomePage() {
         <Link className='boton' to="/Formulario" >
           + AÑADIR EVENTO
         </Link>
-        
       </div>
     </div>
   );

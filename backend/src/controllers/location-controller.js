@@ -29,6 +29,7 @@ locationController.get("/", middleware.pagination, async (req,res) =>{
 
 })
 
+
 locationController.get("/:id", async (req, res) =>{ 
     const id = req.params.id;
     const location = await locationService.getLocationById(id)

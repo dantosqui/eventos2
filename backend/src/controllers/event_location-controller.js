@@ -43,7 +43,6 @@ eventLocationController.get("/:id",middleware.userMiddleware,async (req,res)=>{
 
 eventLocationController.post("/",middleware.userMiddleware,async (req,res) =>{ 
    
-
    try{
     
     const eventLocation = new Event_location()
@@ -97,8 +96,8 @@ eventLocationController.put("/",middleware.userMiddleware,async (req,res) =>{
     try{
         let eventlocation = new Event_location()
         
-        eventlocation.id=req.body.id
-        eventlocation.id_location=req.body.id_location
+        eventLocation.id = Number(req.body.id)
+        eventLocation.id_location = Number(req.body.id_location)
         eventlocation.name=req.body.name
         eventlocation.full_address=req.body.full_address
         eventlocation.max_capacity=req.body.max_capacity

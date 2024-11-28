@@ -66,13 +66,14 @@ const DetalleEventos = () => {
             {event ? (
                 <div>
                     <h1>{event.name}</h1>
+                    <h2>Descripción:</h2>
                     <p>{event.description}</p>
-                    <h2>Detalles</h2>
+                    <h2>Detalles:</h2>
                     <p>
                         <strong>Comienzo:</strong> {new Date(event.start_date).toLocaleString()}
                     </p>
                     <p>
-                        <strong>Duración:</strong> {event.duration_in_minutes} minutes
+                        <strong>Duración:</strong> {event.duration_in_minutes} minutos ({(event.duration_in_minutes / 60).toFixed(2)} horas)
                     </p>
                     <p>
                         <strong>Precio:</strong> ${event.price}
