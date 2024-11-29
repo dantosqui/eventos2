@@ -44,7 +44,7 @@ eventLocationController.get("/:id",middleware.userMiddleware,async (req,res)=>{
 eventLocationController.post("/",middleware.userMiddleware,async (req,res) =>{ 
    
    try{
-    
+   
     const eventLocation = new Event_location()
 
     eventLocation.id_location = Number(req.body.id_location)

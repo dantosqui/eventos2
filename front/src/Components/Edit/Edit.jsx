@@ -30,10 +30,14 @@ const [categories, setCategories] = useState([])
   const [activeTab, setActiveTab] = useState('edit'); // Nueva variable para manejar la pestaña activa
 
   useEffect(() => {
-    fetchLocations();
-    fetchEventLocations();
-    fetchEventCategories();
-  }, []);
+    if (token) {
+      fetchLocations();
+      fetchEventLocations();
+      fetchEventCategories();
+    } else {
+      console.error("Token no disponible, verifica la autenticación.");
+    }
+  }, [token]);
   const fetchEventCategories = async (page = 1) => {
     const fetchedCategories = [];
     try {
@@ -84,6 +88,7 @@ const [categories, setCategories] = useState([])
 
   const fetchLocations = async (page = 1) => {
     const fetchedLocations = [];
+    
     try {
       const response = await axios.get(`${urlBack}location/`, {
         params: {
@@ -152,8 +157,10 @@ const [categories, setCategories] = useState([])
     }
   };
   const handleEventLocationSubmitCreate= async (e) => {
+    
     e.preventDefault();
     try {
+      console.log("TOKEN",token)
       const response = await axios.post(
         `${urlBack}event-location/`,{
     
@@ -246,6 +253,7 @@ const [categories, setCategories] = useState([])
     }
   };
   return (
+    <>
     <div className="wrapper-dos-forms">
       {/* Sub-tabs para cambiar entre las secciones */}
       <div className="tabs">
@@ -597,7 +605,10 @@ const [categories, setCategories] = useState([])
           </form>
         </div>
       )}
+      
     </div>
+    <div className="margen"></div>
+    </>
   );
 }
 

@@ -14,9 +14,14 @@ export const AuthProvider = ({ children }) => {
     const [token,setToken]=useState('')
 
     useEffect(()=>{
+     
         const tokenExists = localStorage.getItem('token') ? true : false
+      
         setIsLoggedIn(tokenExists)
-        if (tokenExists) setToken(localStorage.getItem('token'))
+        if (tokenExists){ setToken(localStorage.getItem('token'))
+          console.log(token)
+        }
+          
     },[])
 
     const logIn = async (username,password,navigate) => {

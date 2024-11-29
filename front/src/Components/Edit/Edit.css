@@ -1,19 +1,51 @@
 .wrapper-dos-forms {
     display: flex;
-    justify-content: space-evenly;
+    flex-direction: column;
+    align-items: center; /* Alinea horizontalmente las secciones */
 }
 
-.form-wrapper{
+.tabs {
+    display: flex;
+    justify-content: center; /* Centra las pestañas */
+    gap: 10px; /* Espaciado entre las pestañas */
+    margin-bottom: 20px; /* Espaciado entre las pestañas y el formulario */
+}
+
+.tabs button {
+    padding: 10px 15px;
+    background-color: #f1f1f1;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.tabs button.active-tab {
+    background-color: #F3C623;
+    border-color: #dab11e;
+}
+
+.tabs button:hover {
+    background-color: #ddd;
+}
+
+.form-wrapper {
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
-}
-.boton-submit{
-    background-color: #F3C623;
+    width: 100%; /* Asegura que el formulario tenga el mismo ancho que las pestañas */
+    max-width: 600px; /* Define un ancho máximo para evitar estiramientos excesivos */
 }
 
-.boton-submit:hover{
+.boton-submit {
+    background-color: #F3C623;
+    margin-top: 10px;
+}
+
+.boton-submit:hover {
     transition: all 50ms ease-in-out;
     background-color: #dab11e;
+}
+.margen{
+    margin-bottom: 10rem;
 }
