@@ -163,13 +163,19 @@ const [categories, setCategories] = useState([])
       console.log("TOKEN",token)
       const response = await axios.post(
         `${urlBack}event-location/`,{
-    
-        eventLocationData ,
         
-          headers: {
-            Authorization: `Bearer ${token}`,
+          id: eventLocationData.id,
+          id_location: eventLocationData.id_location,
+          name: eventLocationData.name,
+          full_address: eventLocationData.full_address,
+          max_capacity: eventLocationData.max_capacity,
+          latitude: eventLocationData.latitude,
+          longitude: eventLocationData.longitude,
+        },
+          {
+            headers: {Authorization: `Bearer ${token}`}
           },
-        }
+        
       );
       alert(response.data);
       
@@ -227,7 +233,7 @@ const [categories, setCategories] = useState([])
         name: categoryData.name,
         display_order: categoryData.display_order,
         headers: {
-          Authorization: `Bearer ${token}`,
+          authorization: `Bearer ${token}`,
         }
       });
       alert(response.data);

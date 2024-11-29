@@ -5,7 +5,7 @@ export default class Middleware{
  async userMiddleware (req, res, next) {
    let payloadOriginal= null
    try{
-     console.log(req.headers.authorization)
+     console.log("USER MIDDELWARE", req.headers.authorization)
      let sentToken=req.headers.authorization.split(" ")[1]
      payloadOriginal= await jwt.verify(sentToken, secretkey)
      
