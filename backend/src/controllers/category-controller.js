@@ -59,7 +59,9 @@ categoryController.post("/",async (req,res) => {
 
 
 categoryController.put("/", async (req, res) => { 
+  console.log("HOLA COMO ESTAS")
   try {
+    console.log(req.body.name)
     const updatedCategory = new event_category();
 
     
@@ -90,8 +92,8 @@ categoryController.delete("/:id",async (req,res) => {
     const id=req.params.id
 
     let result = await categoryService.deleteCategory(id)
-    if (result.rowCount<1){
-        return res.status(404).json("Categoria no encontrada")
+        if (!result){
+        return res.status(400).json("No se puede eliminar")
     }
     else{
         return res.status(200).json("Categoria eliminada correctamente")

@@ -64,21 +64,42 @@ async crearEventLocation(evl){
         await this.DBClient.query(sql,[evl.id_location,evl.name,evl.full_address,evl.max_capacity,evl.latitude,evl.longitude,evl.id_creator_user])
     }
     catch(error){
-        console.error ("error al insertar event location: ",error)
+        return false
     }
 }
 
 
-async   deleteEventLocation(id,idUser){
-    try{
-        const sql = 'delete from event_locations where id=$1 and id_creator_user = $2'
-        const result = await this.DBClient.query(sql,[id,idUser])
-        return result
-    }
-    catch (e)
-    {    console.error("error al eliminar event location: ",e)}
-}
+async deleteEventLocation(id, idUser) {
+    try {
+        // Verifica si la ubicación del evento está siendo utilizada en eventos
+        const checkSql = `
+            SELECT COUNT(*) AS count
+            FROM events
+            WHERE id_event_location = $1
+        `;
+        const checkResult = await this.DBClient.query(checkSql, [id]);
 
+        const locationCount = parseInt(checkResult.rows[0].count, 10);
+
+        if (locationCount > 0) {
+            // Si la ubicación está en uso, devuelve false y el mensaje adecuado
+            return false;
+        }
+      
+        // Si no está en uso, intenta eliminar la ubicación del evento
+        const deleteSql = 'DELETE FROM event_locations WHERE id = $1 AND id_creator_user = $2';
+        const result = await this.DBClient.query(deleteSql, [id, idUser]);
+        // Verifica si la eliminación fue exitosa
+        if (result.rowCount >= 0) {
+            return true;
+        }
+
+        return false;
+    } catch (e) {
+        // Manejo general de errores
+        return { success: false, message: 'Error inesperado', error: e.message };
+    }
+}
 async isCreatorUser(idUser,idEventLocation){
     try{
         const sql ="SELECT * from event_locations WHERE id=$1 and id_creator_user=$2"

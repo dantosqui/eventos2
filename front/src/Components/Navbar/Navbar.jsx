@@ -28,11 +28,11 @@ function Navbar() {
             </>
           ) : (
             <div className="navbar-logged-in">
-              <Link className='navbar-menu-item' to="/edit">Editar</Link>
+            
               <div className="navbar-profile">
-                <span>{username}</span>
+                <span>Bienvenido/a, {username}</span>
               </div>
-              
+              <Link className="logout-button" to="/edit">Editar categorias/estadios</Link>
               <button onClick={handleCerrarSesion} className="logout-button">
                 Cerrar sesión
               </button>

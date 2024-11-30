@@ -126,6 +126,8 @@ export default function Formulario(){
 
     }
       return (
+        <>
+        <h1>Crea un evento</h1>
         <form onSubmit={handleSubmit}>
           <div>
             <label>Nombre del evento:</label>
@@ -240,6 +242,7 @@ export default function Formulario(){
     
           <button type="submit">Crear evento</button>
         </form>
+        </>
       );
 
 

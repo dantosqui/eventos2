@@ -57,16 +57,33 @@ export default class CategoryRepository {
     }
   }
 
-  async deleteCategory(id){
-    try{
-      const sql = 'DELETE FROM event_categories where id = $1'
-      const result = this.DBClient.query(sql,[id])
-      return result
+async deleteCategory(id) {
+    try {
+        // Verifica si hay eventos asociados a la categoría
+        const checkSql = `
+            SELECT COUNT(*) AS count
+            FROM events
+            WHERE id_event_category = $1
+        `;
+        const checkResult = await this.DBClient.query(checkSql, [id]);
+        const eventCount = parseInt(checkResult.rows[0].count, 10);
+
+        if (eventCount > 0) {
+            // Si hay eventos relacionados, devuelve false
+            return false;
+        }
+
+        // Intenta eliminar la categoría
+        const deleteSql = 'DELETE FROM event_categories WHERE id = $1';
+        await this.DBClient.query(deleteSql, [id]);
+
+        return true; // Eliminación exitosa
+    } catch (e) {
+        // Devuelve false si ocurre cualquier error
+        return false;
     }
-    catch(e){
-      console.error("error al borrar categoria")
-    }
-  }
+}
+
 
 
 

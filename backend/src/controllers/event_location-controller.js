@@ -83,10 +83,10 @@ eventLocationController.delete("/:id",middleware.userMiddleware,async (req, res)
     const idUser = req.id
 
     let result = await eventLocationService.deleteEventLocation(idEvLoc,idUser) 
-    if(result.rowCount<1){
-        return res.status(404).json("Event location no encontrado")
+    if(!result){
+        return res.status(400).json("El evento no se puede eliminar")
     }
-    else{
+    else{console.log("RESULT ES TRUE")
         return res.status(200).json("Event location eliminado correctamente")
     }
 })
@@ -94,40 +94,41 @@ eventLocationController.delete("/:id",middleware.userMiddleware,async (req, res)
 eventLocationController.put("/",middleware.userMiddleware,async (req,res) =>{ 
 
     try{
-        let eventlocation = new Event_location()
+        let eventLocation = new Event_location()
         
         eventLocation.id = Number(req.body.id)
         eventLocation.id_location = Number(req.body.id_location)
-        eventlocation.name=req.body.name
-        eventlocation.full_address=req.body.full_address
-        eventlocation.max_capacity=req.body.max_capacity
-        eventlocation.latitude=req.body.latitude
-        eventlocation.longitude=req.body.longitude
-        eventlocation.id_creator_user=req.id
+        eventLocation.name=req.body.name
+        eventLocation.full_address=req.body.full_address
+        eventLocation.max_capacity=req.body.max_capacity
+        eventLocation.latitude=req.body.latitude
+        eventLocation.longitude=req.body.longitude
+        eventLocation.id_creator_user=req.id
         
 
-        if (!(await eventLocationService.locationExists(eventlocation.id_location))){            
+        if (!(await eventLocationService.locationExists(eventLocation.id_location))){            
             throw new Error("Datos no validos")
         }
-        if ( eventlocation.name.length<3 || eventlocation.full_address.length<3){
+        if ( eventLocation.name.length<3 || eventLocation.full_address.length<3){
             throw new Error ("Datos no validos")
         }
         
-        if(eventlocation.maxCapacity <=0)
+        if(eventLocation.maxCapacity <=0)
             throw new Error("Datos no validos")
         
         
 
-        if(!(await eventLocationService.eventLocationExists(eventlocation.id)) || !(await eventLocationService.isCreatorUser(eventlocation.id_creator_user,eventlocation.id))){
+        if(!(await eventLocationService.eventLocationExists(eventLocation.id)) || !(await eventLocationService.isCreatorUser(eventLocation.id_creator_user,eventLocation.id))){
             return res.status(404).json("Ubicacion no encontrada. Verifique que es el usuario creador y haya iniciado correctamente el ID de la localidad")
         }
         else{
             
-            await eventLocationService.updateEventLocation(eventlocation)
+            await eventLocationService.updateEventLocation(eventLocation)
             return res.status(200).json("Registro actualizado")
         }
     }
     catch (error){
+        console.error(error)
         return res.status(400).json("Datos no validos")
     }
 

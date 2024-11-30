@@ -3,8 +3,12 @@ import axios from "axios";
 import urlBack from "../../config";
 import "./Edit.css";
 import { AuthContext } from "../../authcontext";
+import { useNavigate } from "react-router-dom";
+
+
 
 function Edit() {
+  const navigate = useNavigate();
   const { checkAuth, isLoggedIn, token } = useContext(AuthContext);
 const [categories, setCategories] = useState([])
   const [eventLocationData, setEventLocationData] = useState({
@@ -142,16 +146,22 @@ const [categories, setCategories] = useState([])
     try {
       const response = await axios.put(
         `${urlBack}event-location/`,{
-    
-        eventLocationData ,
         
-          headers: {
-            Authorization: `Bearer ${token}`,
+          id: eventLocationData.id,
+          id_location: eventLocationData.id_location,
+          name: eventLocationData.name,
+          full_address: eventLocationData.full_address,
+          max_capacity: eventLocationData.max_capacity,
+          latitude: eventLocationData.latitude,
+          longitude: eventLocationData.longitude,
+        },
+          {
+            headers: {Authorization: `Bearer ${token}`}
           },
-        }
+        
       );
       alert(response.data);
-      
+      navigate("/"); 
     } catch (error) {
       alert("Error al crear/editar la ubicación del evento");
     }
@@ -178,7 +188,7 @@ const [categories, setCategories] = useState([])
         
       );
       alert(response.data);
-      
+      navigate("/"); 
     } catch (error) {
       alert("Error al crear/editar la ubicación del evento");
     }
@@ -187,17 +197,14 @@ const [categories, setCategories] = useState([])
     e.preventDefault();
     try {
       const response = await axios.delete(
-        `${urlBack}event-location/`,{
-       params:{
-        id: eventLocationData.id} ,
-        
-          headers: {
-            Authorization: `Bearer ${token}`,
+        `${urlBack}event-location/${eventLocationData.id}`,
+          {
+            headers: {Authorization: `Bearer ${token}`}
           },
-        }
+        
       );
       alert(response.data);
-      
+      navigate("/"); 
     } catch (error) {
       alert("Error al crear/editar la ubicación del evento");
     }
@@ -214,13 +221,19 @@ const [categories, setCategories] = useState([])
   const handleCategorySubmitEdit = async (e) => {
     e.preventDefault();
     try {
-      const response = await axios.put(`${urlBack}event-category/`, {
-        categoryData,
-        headers: {
-          Authorization: `Bearer ${token}`,
-        }
-      });
+      const response = await axios.put(
+        `${urlBack}event-category/`,{
+          id: categoryData.id,
+          name: categoryData.name,
+          display_order: categoryData.display_order,
+        },
+          {
+            headers: {Authorization: `Bearer ${token}`}
+          },
+        
+      );
       alert(response.data);
+      navigate("/"); 
     } catch (error) {
       alert("Error al editar la categoría");
     }
@@ -237,6 +250,7 @@ const [categories, setCategories] = useState([])
         }
       });
       alert(response.data);
+      navigate("/"); 
     } catch (error) {
       alert("Error al crear la categoría");
     }
@@ -245,15 +259,17 @@ const [categories, setCategories] = useState([])
   const handleCategorySubmitDelete = async (e) => {
     e.preventDefault();
     try {
-      const response = await axios.delete(`${urlBack}event-category/`, {
-        params: {
-          id: categoryData.id
+      const response = await axios.delete(
+        `${urlBack}event-category/${categoryData.id}`,{
+        
         },
-        headers: {
-          Authorization: `Bearer ${token}`,
-        }
-      });
+          {
+            headers: {Authorization: `Bearer ${token}`}
+          },
+        
+      );
       alert(response.data);
+      navigate("/"); 
     } catch (error) {
       alert("Error al borrar la categoría");
     }
@@ -262,7 +278,14 @@ const [categories, setCategories] = useState([])
     <>
     <div className="wrapper-dos-forms">
       {/* Sub-tabs para cambiar entre las secciones */}
-      <div className="tabs">
+  
+
+      {/* Formulario dependiendo de la pestaña activa */}
+      {activeTab === 'edit' && (
+        <div className="form-wrapper">
+          
+          <h2>Editar Ubicación del Evento</h2>
+          <div className="tabs">
         <button 
           onClick={() => setActiveTab('edit')} 
           className={activeTab === 'edit' ? 'active-tab' : ''}
@@ -282,11 +305,6 @@ const [categories, setCategories] = useState([])
           Borrar Estadio
         </button>
       </div>
-
-      {/* Formulario dependiendo de la pestaña activa */}
-      {activeTab === 'edit' && (
-        <div className="form-wrapper">
-          <h2>Editar Ubicación del Evento</h2>
           <form onSubmit={handleEventLocationSubmitEdit}>
             <label>
               Seleccionar Estadio:
@@ -382,6 +400,26 @@ const [categories, setCategories] = useState([])
       {activeTab === 'create' && (
         <div className="form-wrapper">
           <h2>Crear Ubicación del Evento</h2>
+          <div className="tabs">
+        <button 
+          onClick={() => setActiveTab('edit')} 
+          className={activeTab === 'edit' ? 'active-tab' : ''}
+        >
+          Modificar Estadio
+        </button>
+        <button 
+          onClick={() => setActiveTab('create')} 
+          className={activeTab === 'create' ? 'active-tab' : ''}
+        >
+          Crear Estadio
+        </button>
+        <button 
+          onClick={() => setActiveTab('delete')} 
+          className={activeTab === 'delete' ? 'active-tab' : ''}
+        >
+          Borrar Estadio
+        </button>
+      </div>
           <form onSubmit={handleEventLocationSubmitCreate}>
             <label>
               Seleccionar Ubicación:
@@ -462,6 +500,26 @@ const [categories, setCategories] = useState([])
       {activeTab === 'delete' && (
         <div className="form-wrapper">
           <h2>Borrar Ubicación del Evento</h2>
+          <div className="tabs">
+        <button 
+          onClick={() => setActiveTab('edit')} 
+          className={activeTab === 'edit' ? 'active-tab' : ''}
+        >
+          Modificar Estadio
+        </button>
+        <button 
+          onClick={() => setActiveTab('create')} 
+          className={activeTab === 'create' ? 'active-tab' : ''}
+        >
+          Crear Estadio
+        </button>
+        <button 
+          onClick={() => setActiveTab('delete')} 
+          className={activeTab === 'delete' ? 'active-tab' : ''}
+        >
+          Borrar Estadio
+        </button>
+      </div>
           <form onSubmit={handleEventLocationSubmitDelete}>
             <label>
               Seleccionar Estadio:
@@ -484,7 +542,12 @@ const [categories, setCategories] = useState([])
         </div>
       )}
 
-<div className="tabs">
+
+
+      {activeCategoryTab === 'edit-category' && (
+        <div className="form-wrapper">
+          <h2>Editar Categoría</h2>
+          <div className="tabs">
         <button 
           onClick={() => setActiveCategoryTab('edit-category')} 
           className={activeCategoryTab === 'edit-category' ? 'active-tab' : ''}
@@ -504,10 +567,6 @@ const [categories, setCategories] = useState([])
           Borrar Categoría
         </button>
       </div>
-
-      {activeCategoryTab === 'edit-category' && (
-        <div className="form-wrapper">
-          <h2>Editar Categoría</h2>
           <form onSubmit={handleCategorySubmitEdit}>
             <label>
               Seleccionar Categoría:
@@ -557,6 +616,26 @@ const [categories, setCategories] = useState([])
       {activeCategoryTab === 'create-category' && (
         <div className="form-wrapper">
           <h2>Crear Categoría</h2>
+          <div className="tabs">
+        <button 
+          onClick={() => setActiveCategoryTab('edit-category')} 
+          className={activeCategoryTab === 'edit-category' ? 'active-tab' : ''}
+        >
+          Modificar Categoría
+        </button>
+        <button 
+          onClick={() => setActiveCategoryTab('create-category')} 
+          className={activeCategoryTab === 'create-category' ? 'active-tab' : ''}
+        >
+          Crear Categoría
+        </button>
+        <button 
+          onClick={() => setActiveCategoryTab('delete-category')} 
+          className={activeCategoryTab === 'delete-category' ? 'active-tab' : ''}
+        >
+          Borrar Categoría
+        </button>
+      </div>
           <form onSubmit={handleCategorySubmitCreate}>
             <label>
               Nombre:
@@ -590,6 +669,26 @@ const [categories, setCategories] = useState([])
       {activeCategoryTab === 'delete-category' && (
         <div className="form-wrapper">
           <h2>Borrar Categoría</h2>
+          <div className="tabs">
+        <button 
+          onClick={() => setActiveCategoryTab('edit-category')} 
+          className={activeCategoryTab === 'edit-category' ? 'active-tab' : ''}
+        >
+          Modificar Categoría
+        </button>
+        <button 
+          onClick={() => setActiveCategoryTab('create-category')} 
+          className={activeCategoryTab === 'create-category' ? 'active-tab' : ''}
+        >
+          Crear Categoría
+        </button>
+        <button 
+          onClick={() => setActiveCategoryTab('delete-category')} 
+          className={activeCategoryTab === 'delete-category' ? 'active-tab' : ''}
+        >
+          Borrar Categoría
+        </button>
+      </div>
           <form onSubmit={handleCategorySubmitDelete}>
             <label>
               Seleccionar Categoría:
@@ -613,7 +712,6 @@ const [categories, setCategories] = useState([])
       )}
       
     </div>
-    <div className="margen"></div>
     </>
   );
 }
